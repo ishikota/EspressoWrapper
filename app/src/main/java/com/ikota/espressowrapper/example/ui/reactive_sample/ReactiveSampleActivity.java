@@ -1,7 +1,6 @@
 package com.ikota.espressowrapper.example.ui.reactive_sample;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ikota.espressowrapper.R;
+import com.ikota.espressowrapper.example.AndroidApplication;
+import com.ikota.espressowrapper.example.BaseActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -20,7 +21,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 @SuppressWarnings("unused")
-public class ReactiveSampleActivity extends Activity implements ReactiveSampleContract.View{
+public class ReactiveSampleActivity extends BaseActivity implements ReactiveSampleContract.View{
 
     private ReactiveSampleContract.UserActionsListener mActionsListener;
 
@@ -48,7 +49,8 @@ public class ReactiveSampleActivity extends Activity implements ReactiveSampleCo
         setContentView(R.layout.reactive_activity);
         ButterKnife.inject(this);
 
-        mActionsListener = new ReactiveSamplePresenter(this);
+        AndroidApplication app = (AndroidApplication)getApplication();
+        mActionsListener = new ReactiveSamplePresenter(app.api(), this);
         mActionsListener.loadPhoto();
     }
 

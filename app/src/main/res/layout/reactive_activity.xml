@@ -16,7 +16,8 @@
                 android:layout_height="wrap_content"
                 android:minHeight="108dp"
                 android:background="#EEEEEE"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:contentDescription=""/>
 
             <TextView
                 android:id="@+id/title"

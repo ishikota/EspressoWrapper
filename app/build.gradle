@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -17,24 +18,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile 'com.squareup.dagger:dagger:1.2.+'
+    compile 'com.squareup.dagger:dagger-compiler:1.2.+'
+
+    compile 'com.android.support.test:runner:0.3'
+    compile 'com.android.support.test:rules:0.3'
+    compile 'com.android.support.test.espresso:espresso-core:2.2'
+
     // for UnitTest
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"
 
-    // for Robolectric
-    testCompile 'org.robolectric:robolectric:3.0-rc2'
 
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
-    androidTestCompile "org.mockito:mockito-core:1.9.5"
+    androidTestCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
     // below code help you from erro around RecyclerView conflicts.
     androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2'){
         exclude group: 'com.android.support', module: 'appcompat'

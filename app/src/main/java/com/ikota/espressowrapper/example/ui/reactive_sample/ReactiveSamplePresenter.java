@@ -5,7 +5,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ikota.espressowrapper.R;
-import com.ikota.espressowrapper.example.data.FakeApi;
+import com.ikota.espressowrapper.example.data.Api;
+import com.ikota.espressowrapper.example.data.ApiCallback;
 import com.ikota.espressowrapper.example.model.Photo;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class ReactiveSamplePresenter implements ReactiveSampleContract.UserActionsListener{
 
+    private final Api API;
     private final ReactiveSampleContract.View mReactiveView;
 
     private Photo mPhotoData;
@@ -30,13 +32,14 @@ public class ReactiveSamplePresenter implements ReactiveSampleContract.UserActio
     private String comment_editing = "";
 
 
-    public ReactiveSamplePresenter(ReactiveSampleContract.View reactive_view) {
+    public ReactiveSamplePresenter(Api api, ReactiveSampleContract.View reactive_view) {
+        API = api;
         this.mReactiveView = reactive_view;
     }
 
     @Override
     public void loadPhoto() {
-        FakeApi.fakeApiCall(new FakeApi.ApiCallback() {
+        API.callAPi(new ApiCallback() {
             @Override
             public void onResult(Photo photo) {
                 mPhotoData = photo;

@@ -1,33 +1,26 @@
 package com.ikota.espressowrapper.example.data;
 
+
 import android.os.AsyncTask;
 import android.os.SystemClock;
 
 import com.ikota.espressowrapper.example.model.Photo;
 
-
-public class FakeApi implements Api {
-
-    private int mSleepingTime = 3000;
-
-    public void setSleepingTime(int seconds) {
-        this.mSleepingTime = seconds;
-    }
-
+public class RealApi implements Api{
     @Override
     public void callAPi(ApiCallback callback) {
-        new FakeApiCall(callback).execute(mSleepingTime);
+        new RealApiCall(callback).execute();
     }
 
-    private static class FakeApiCall extends AsyncTask<Integer, Void, Photo> {
+    private static class RealApiCall extends AsyncTask<Void, Void, Photo> {
         private ApiCallback mCallback;
-        public FakeApiCall(ApiCallback callback) {
+        public RealApiCall(ApiCallback callback) {
             mCallback = callback;
         }
 
         @Override
-        protected Photo doInBackground(Integer... args) {
-            SystemClock.sleep(args[0]);  // simulate api call
+        protected Photo doInBackground(Void... voids) {
+            SystemClock.sleep(3000);  // simulate api call
             return Photo.createFakeData();
         }
 
@@ -36,5 +29,4 @@ public class FakeApi implements Api {
             mCallback.onResult(photo);
         }
     }
-
 }
