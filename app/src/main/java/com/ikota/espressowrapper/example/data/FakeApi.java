@@ -33,6 +33,7 @@ public class FakeApi implements Api {
 
         @Override
         protected void onPostExecute(Photo photo) {
+            photo.title = "FakeTitle";
             mCallback.onResult(photo);
         }
     }

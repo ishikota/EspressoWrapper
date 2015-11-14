@@ -18,6 +18,8 @@ public class FakeApiModule {
     @Provides
     @Singleton
     public Api provideFakeApi() {
-        return new FakeApi();
+        FakeApi api = new FakeApi();
+        api.setSleepingTime(1);
+        return api;
     }
 }
