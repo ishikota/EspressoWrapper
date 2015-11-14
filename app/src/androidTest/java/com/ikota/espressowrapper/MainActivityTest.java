@@ -1,6 +1,7 @@
 package com.ikota.espressowrapper;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private Intent mIntent;
+    private Application mApp;
     private Context mContext;
 
     public MainActivityTest() {
@@ -39,6 +41,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void setup() throws Exception {
         super.setUp();
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        mApp = (Application)instrumentation.getTargetContext().getApplicationContext();
         mContext = instrumentation.getContext();
         mIntent = new Intent(mContext, MainActivity.class);
     }
