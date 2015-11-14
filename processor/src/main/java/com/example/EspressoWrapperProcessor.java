@@ -52,6 +52,7 @@ public class EspressoWrapperProcessor extends AbstractProcessor{
         Map<TypeElement, BindingClass> targetClassMap = new LinkedHashMap<TypeElement, BindingClass>();
         Set<String> erasedTargetNames = new LinkedHashSet<String>();
         for (Element element : roundEnv.getElementsAnnotatedWith(TargetActivity.class)) {
+            System.out.println("Sample at:" + element);
             try {
                 if (element.getKind() != ElementKind.FIELD) {
                     error(element, "OnActivityResult annotations can only be applied to Fields!");
