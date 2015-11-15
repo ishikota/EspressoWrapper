@@ -1,6 +1,9 @@
 package com.example;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.FieldSpec;
+
+import org.junit.Rule;
 
 import java.util.Collections;
 import java.util.List;
@@ -87,6 +90,7 @@ public class EspressoWrapperProcessor extends AbstractProcessor{
                             } catch (ClassNotFoundException error) {
                                 log("ClassNotFoundException : "+error.getMessage());
                             }
+                            writeTo(value.getValue().toString());
                         }
                     }
 
@@ -95,6 +99,15 @@ public class EspressoWrapperProcessor extends AbstractProcessor{
 
         }
         return true;
+    }
+
+    private void writeTo(String classname) {
+        FieldSpec activityRule = FieldSpec.builder(String.class, "activityTestRule")
+                .addAnnotation(Rule.class)
+                .addModifiers(javax.lang.model.element.Modifier.PUBLIC)
+                .initializer("new ActivityTestRule<>(MainActivity.class,true,false)")
+                .build();
+        log("writeTo:" + activityRule.toString());
     }
 
     public static TypeElement findEnclosingTypeElement( Element e ) {
