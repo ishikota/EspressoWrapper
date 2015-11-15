@@ -32,7 +32,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(
+    public ActivityTestRule activityRule = new ActivityTestRule(
             MainActivity.class,
             true,     // initialTouchMode
             false);   // launchActivity. False so we can customize the intent per test method

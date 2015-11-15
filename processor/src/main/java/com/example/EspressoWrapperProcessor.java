@@ -1,6 +1,7 @@
 package com.example;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 
 import org.junit.Rule;
@@ -90,7 +91,8 @@ public class EspressoWrapperProcessor extends AbstractProcessor{
                             } catch (ClassNotFoundException error) {
                                 log("ClassNotFoundException : "+error.getMessage());
                             }
-                            writeTo(value.getValue().toString());
+                            String[] package_elements = value.getValue().toString().split("\\.",0);
+                            writeTo(package_elements[package_elements.length-1]);  // last element is annotated className
                         }
                     }
 
@@ -102,7 +104,11 @@ public class EspressoWrapperProcessor extends AbstractProcessor{
     }
 
     private void writeTo(String classname) {
-        FieldSpec activityRule = FieldSpec.builder(String.class, "activityTestRule")
+//        log("writeTo: class name is "+classname);
+//        String genericClass = String.format("ActivityTestRule<%s>",classname);
+//        log("generic class: "+genericClass);
+        ClassName className = ClassName.get("android.support.test.rule", "ActivityTestRule");
+        FieldSpec activityRule = FieldSpec.builder(className, "activityTestRule")
                 .addAnnotation(Rule.class)
                 .addModifiers(javax.lang.model.element.Modifier.PUBLIC)
                 .initializer("new ActivityTestRule<>(MainActivity.class,true,false)")
