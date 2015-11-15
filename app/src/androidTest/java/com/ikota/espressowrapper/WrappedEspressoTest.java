@@ -3,6 +3,9 @@ package com.ikota.espressowrapper;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.support.test.rule.ActivityTestRule;
+
+import com.example.TargetActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -13,6 +16,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class WrappedEspressoTest extends EspressoWrapper {
 
     private Intent mIntent;
+
+    @TargetActivity(MainActivity.class)
+    ActivityTestRule activityTestRule;
 
     @Override
     void beforeLaunchActivity(MainActivity activity, Application app) {

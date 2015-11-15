@@ -5,5 +5,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 public @interface TargetActivity {
-    int value();
+    Class value();
 }

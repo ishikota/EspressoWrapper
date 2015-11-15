@@ -7,8 +7,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.example.TargetActivity;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +18,6 @@ import org.junit.runner.RunWith;
 public abstract class EspressoWrapper extends ActivityInstrumentationTestCase2<MainActivity> {
 
     abstract void beforeLaunchActivity(MainActivity activity, Application app);
-
-    @TargetActivity(300)
-    Object object;
 
     public EspressoWrapper() {
         super(MainActivity.class);
